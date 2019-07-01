@@ -1,13 +1,13 @@
 {
   "name": "ember-backstop",
   "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "BackstopJS visual regression testing addon for Ember.",
   "keywords": [
     "ember-addon"
   ],
   "repository": "",
   "license": "MIT",
-  "author": "",
+  "author": "garris@me.com",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -18,7 +18,12 @@
     "lint:js": "eslint .",
     "start": "ember serve",
     "test": "ember test",
-    "test:all": "ember try:each"
+    "test:all": "ember try:each",
+    "backstop-remote": "cd ember-backstop/; backstop remote --config=backstop.js",
+    "backstop-stop": "curl http://localhost:3000/stop",
+    "backstop-approve": "cd ember-backstop/; backstop approve --config=backstop.js",
+    "backstop-report": "cd ember-backstop/; backstop openReport --config=backstop.js",
+    "backstop-test": "npm run backstop-remote & just ember test; npm run backstop-stop"
   },
   "dependencies": {
     "ember-cli-babel": "^7.7.3"
@@ -47,12 +52,14 @@
     "eslint-plugin-ember": "^6.2.0",
     "eslint-plugin-node": "^9.0.1",
     "loader.js": "^4.7.0",
-    "qunit-dom": "^0.8.4"
+    "qunit-dom": "^0.8.4",
+    "backstop-byob": "^4.1.11"
   },
   "engines": {
     "node": "8.* || >= 10.*"
   },
   "ember-addon": {
-    "configPath": "tests/dummy/config"
+    "configPath": "tests/dummy/config",
+    "before": "live-reload-middleware"
   }
 }

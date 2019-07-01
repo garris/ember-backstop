@@ -1,7 +1,7 @@
 ember-backstop
 ==============================================================================
 
-[Short description of the addon.]
+Tomster meets Scooch: BackstopJS visual regression testing addon for Ember.
 
 
 Compatibility
