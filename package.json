@@ -1,6 +1,6 @@
 {
   "name": "ember-backstop",
-  "version": "0.0.0",
+  "version": "0.0.6",
   "description": "BackstopJS visual regression testing addon for Ember.",
   "keywords": [
     "ember-addon"
@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "@ember/optional-features": "^0.7.0",
+    "backstopjs": "^4.1.9",
     "broccoli-asset-rev": "^3.0.0",
     "ember-cli": "~3.10.1",
     "ember-cli-dependency-checker": "^3.1.0",
@@ -37,6 +38,7 @@
     "ember-cli-htmlbars": "^3.0.1",
     "ember-cli-htmlbars-inline-precompile": "^2.1.0",
     "ember-cli-inject-live-reload": "^1.8.2",
+    "ember-cli-shims": "^1.2.0",
     "ember-cli-sri": "^2.1.1",
     "ember-cli-template-lint": "^1.0.0-beta.1",
     "ember-cli-uglify": "^2.1.0",
@@ -52,8 +54,7 @@
     "eslint-plugin-ember": "^6.2.0",
     "eslint-plugin-node": "^9.0.1",
     "loader.js": "^4.7.0",
-    "qunit-dom": "^0.8.4",
-    "backstop-byob": "^4.1.11"
+    "qunit-dom": "^0.8.4"
   },
   "engines": {
     "node": "8.* || >= 10.*"

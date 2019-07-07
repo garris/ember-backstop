@@ -1474,9 +1474,9 @@ backo2@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/backo2/-/backo2-1.0.2.tgz#31ab1ac8b129363463e35b3ebb69f4dfcfba7947"
 
-backstop-byob@^4.1.11:
-  version "4.1.11"
-  resolved "https://registry.yarnpkg.com/backstop-byob/-/backstop-byob-4.1.11.tgz#4f318543ec3d601b522957f066d747fb6efa3bd0"
+backstopjs@^4.1.9:
+  version "4.1.9"
+  resolved "https://registry.yarnpkg.com/backstopjs/-/backstopjs-4.1.9.tgz#be83582de10eff4e2ec33c99d3cdd37d7e205526"
   dependencies:
     chalk "^1.1.3"
     chromy "0.5.11"
@@ -1493,7 +1493,7 @@ backstop-byob@^4.1.11:
     p-map "^1.1.1"
     path "^0.12.7"
     portfinder "^1.0.17"
-    puppeteer-core "^1.15.0"
+    puppeteer "^1.15.0"
     resolve "^1.11.1"
     super-simple-web-server "^1.1.2"
     temp "^0.8.3"
@@ -1776,6 +1776,13 @@ broccoli-debug@^0.6.4, broccoli-debug@^0.6.5:
     symlink-or-copy "^1.1.8"
     tree-sync "^1.2.2"
 
+broccoli-file-creator@^1.1.1:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/broccoli-file-creator/-/broccoli-file-creator-1.2.0.tgz#27f1b25b1b00e7bb7bf3d5d7abed5f4d5388df4d"
+  dependencies:
+    broccoli-plugin "^1.1.0"
+    mkdirp "^0.5.1"
+
 broccoli-filter@^1.2.2, broccoli-filter@^1.2.3:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/broccoli-filter/-/broccoli-filter-1.3.0.tgz#71e3a8e32a17f309e12261919c5b1006d6766de6"
@@ -1958,7 +1965,7 @@ broccoli-plugin@1.1.0:
     rimraf "^2.3.4"
     symlink-or-copy "^1.0.1"
 
-broccoli-plugin@^1.0.0, broccoli-plugin@^1.2.0, broccoli-plugin@^1.2.1, broccoli-plugin@^1.3.0, broccoli-plugin@^1.3.1:
+broccoli-plugin@^1.0.0, broccoli-plugin@^1.1.0, broccoli-plugin@^1.2.0, broccoli-plugin@^1.2.1, broccoli-plugin@^1.3.0, broccoli-plugin@^1.3.1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/broccoli-plugin/-/broccoli-plugin-1.3.1.tgz#a26315732fb99ed2d9fb58f12a1e14e986b4fabd"
   dependencies:
@@ -2878,6 +2885,16 @@ ember-cli-preprocess-registry@^3.3.0:
     debug "^3.0.1"
     process-relative-require "^1.0.0"
 
+ember-cli-shims@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/ember-cli-shims/-/ember-cli-shims-1.2.0.tgz#0f53aff0aab80b5f29da3a9731bac56169dd941f"
+  dependencies:
+    broccoli-file-creator "^1.1.1"
+    broccoli-merge-trees "^2.0.0"
+    ember-cli-version-checker "^2.0.0"
+    ember-rfc176-data "^0.3.1"
+    silent-error "^1.0.1"
+
 ember-cli-sri@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/ember-cli-sri/-/ember-cli-sri-2.1.1.tgz#971620934a4b9183cf7923cc03e178b83aa907fd"
@@ -3076,7 +3093,7 @@ ember-resolver@^5.0.1:
     ember-cli-version-checker "^3.0.0"
     resolve "^1.10.0"
 
-ember-rfc176-data@^0.3.9:
+ember-rfc176-data@^0.3.1, ember-rfc176-data@^0.3.9:
   version "0.3.9"
   resolved "https://registry.yarnpkg.com/ember-rfc176-data/-/ember-rfc176-data-0.3.9.tgz#44b6e051ead6c044ea87bd551f402e2cf89a7e3d"
 
@@ -6008,9 +6025,9 @@ punycode@^2.1.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
 
-puppeteer-core@^1.15.0:
+puppeteer@^1.15.0:
   version "1.18.1"
-  resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-1.18.1.tgz#37549e975273b7fa450e0f8a8023db6175ed049a"
+  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-1.18.1.tgz#4a66f3bdab01115ededf70443ec904c99917a815"
   dependencies:
     debug "^4.1.0"
     extract-zip "^1.6.6"

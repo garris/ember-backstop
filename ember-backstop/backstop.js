@@ -1,10 +1,4 @@
 const path = require('path');
-const prebuilt = require('@linkedin/chrome-prebuilt/config');
-
-const PREBUILT_SYMLINK = prebuilt.SYMLINK_PATH;
-const MACOS_NIAVE_PATH = `/Applications/Google Chrome.app/Contents/MacOS/Google Chrome`;
-const EXECUTABLE_PATH = process.platform === 'darwin' ? MACOS_NIAVE_PATH : PREBUILT_SYMLINK;
-console.log('BackstopJS will launch Chrome from: ', EXECUTABLE_PATH);
 
 module.exports = {
   id: `ember-backstop test`,
@@ -35,7 +29,6 @@ module.exports = {
   report: [],
   engine: 'puppet',
   engineOptions: {
-    executablePath: EXECUTABLE_PATH,
     args: ['--no-sandbox'],
   },
   asyncCaptureLimit: 10,

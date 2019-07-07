@@ -24,3 +24,8 @@
 /bower.json.ember-try
 /package.json.ember-try
 .DS_Store
+
+#backstopjs
+html_report
+bitmaps_test
+

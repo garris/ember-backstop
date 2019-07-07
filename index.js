@@ -17,11 +17,25 @@ module.exports = {
   serverMiddleware({ app }) {
     // if using native backstop remote server
     let proxy = require('http-proxy').createProxyServer({});
-    proxy.on('error', function(err, req) {
+    proxy.on('error', function(err, req, res) {
       console.error(err, req.url);
+      res.writeHead(500, {
+        'Content-Type': 'text/plain'
+      });
+      res.end(err + ' Please check that backstop-remote service is running.');
     });
     app.use(BACKSTOP_PROXY_PATH, function(req, res, next) {
       proxy.web(req, res, { target: BACKSTOP_PROXY_TARGET });
     });
   },
+
+  includedCommands() {
+    return {
+      'backstop:remote': require('./commands/backstop-remote'),
+      // 'backstop:stop': require('./lib/commands/backstop-stop'),
+      // 'backstop:approve': require('./lib/commands/backstop-approve'),
+      // 'backstop:report': require('./lib/commands/backstop-report'),
+      // 'backstop:test': require('./lib/commands/backstop-test')
+    };
+  }
 };
