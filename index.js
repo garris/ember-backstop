@@ -34,7 +34,7 @@ module.exports = {
       'backstop:remote': require('./commands/backstop-remote'),
       'backstop:approve': require('./commands/backstop-approve'),
       'backstop:report': require('./commands/backstop-report'),
-      // 'backstop:stop': require('./commands/backstop-stop'),
+      'backstop:stop': require('./commands/backstop-stop'),
       // 'backstop:test': require('./commands/backstop-test')
     };
   }
