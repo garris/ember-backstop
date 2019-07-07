@@ -32,10 +32,10 @@ module.exports = {
   includedCommands() {
     return {
       'backstop:remote': require('./commands/backstop-remote'),
-      // 'backstop:stop': require('./lib/commands/backstop-stop'),
-      // 'backstop:approve': require('./lib/commands/backstop-approve'),
-      // 'backstop:report': require('./lib/commands/backstop-report'),
-      // 'backstop:test': require('./lib/commands/backstop-test')
+      'backstop:approve': require('./commands/backstop-approve'),
+      'backstop:report': require('./commands/backstop-report'),
+      // 'backstop:stop': require('./commands/backstop-stop'),
+      // 'backstop:test': require('./commands/backstop-test')
     };
   }
 };

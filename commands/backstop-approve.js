@@ -2,16 +2,16 @@
 const backstopjs = require('backstopjs');
 
 module.exports = {
-  name: 'backstop:remote',
-  aliases: ['backstop-remote'],
+  name: 'backstop:approve',
+  aliases: ['backstop-approve'],
   availableOptions: [
     { name: 'filter', type: String, aliases: ['f'], default: ''},
     { name: 'config', type: String, aliases: ['c'], default: './backstop.js' }
   ],
-  description: 'Launch Backstop-Remote server.',
+  description: 'Approve most-recent test bitmaps to reference. Use `--filter` to filter by filename (accepts regex string).',
   run(commandOptions) {
     process.chdir('./ember-backstop');
-    return backstopjs('remote', {
+    return backstopjs('approve', {
       config: commandOptions.config, 
       filter: commandOptions.filter
     });
