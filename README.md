@@ -19,12 +19,13 @@ Compatibility
 Installation
 ------------------------------------------------------------------------------
 
-### First...
+### First do this...
 ```
 ember install ember-backstop
 ```
-### If you use GIT
-Add these lines to your GIT ignore...
+
+### Next, for Git...
+Add these lines to your `<project>/gitignore`...
 ```
   #backstopjs
   html_report
@@ -32,9 +33,20 @@ Add these lines to your GIT ignore...
 ```
 
 ### If you use Mirage 
-Add this line to your Mirage config...
+Add this line to `<project>/mirage/config.json`...
 ```
   this.passthrough('/backstop/**');
+```
+
+### If you test with `ember test`
+Add this to your `<project>/testem.js`...
+```
+  proxies: {
+    '/backstop': {
+      target: 'http://localhost:3000',
+      secure: false,
+    },
+  },
 ```
 
 Usage
