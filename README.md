@@ -2,8 +2,7 @@
 
 **BackstopJS visual regression testing addon for Ember.**
 
-- Really easy-to-add to your Ember project.
-- Simple to use.
+- Simple to add, Simple to use.
 - Works in Local or CI pipeline.
 - Manages your test and reference files.
 - Works in your existing Acceptance and Integration tests.
