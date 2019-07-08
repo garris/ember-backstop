@@ -1,5 +1,4 @@
 # ember-backstop
-==============================================================================
 
 ## BackstopJS visual regression testing addon for Ember.
 
