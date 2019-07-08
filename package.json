@@ -61,6 +61,6 @@
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
-    "before": "live-reload-middleware"
+    "before": "ember-cli-inject-live-reload"
   }
 }
