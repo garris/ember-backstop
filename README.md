@@ -73,6 +73,10 @@ The first time you run backstop-helper tests BackstopJS will fail because there 
 
 Tests should pass now.
 
+### If your screenshots are blank
+Take a look at your test network calls.  Are you seeing `UnrecognizedURLError` errors?  If so, there may be an issue with a middleware addon dependency loading too early. Try ensuring any server dependencies don't block proxy requests to `/backstop/**`. Post the issue [here](https://github.com/garris/ember-backstop/issues) and let us know! 
+
+
 ### View the most recent BackstopJS test report
 You can always view the last test run report by running `ember backstop-report` in another window. 
 
