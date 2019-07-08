@@ -44,7 +44,7 @@ You will need the backstop-remote service running for visual tests.
 
 In a seperate window run...
 ```
-ember backstop remote
+ember backstop-remote
 ```
 Leave that running while you're testing. When you don't need it anymore you can either close the window or run `ember backstop-stop` to stop the service.
 
