@@ -1,4 +1,9 @@
 import { later } from 'ember-runloop';
+import { maybeDisableMockjax, maybeResetMockjax } from './mockjax-wrapper';
+
+// If backstop-remote service is not found and silentlyFailOnError === true then 
+// the backstop test will pass with a warning message.
+const silentlyFailOnError = false;
 
 const ORIGIN = window.location.origin;
 const BACKSTOP_DYNAMIC_TEST_URL = 'backstop/dtest';
@@ -62,7 +67,7 @@ function status(response) {
     return Promise.resolve(response);
   } else {
     return Promise.reject(
-      new Error('backstop-remote call failed with: ' + response.status + ' ' + response.statusText)
+      new Error(`Proxy returned "${response.status} ${response.statusText}". Please check that backstop-remote is running. ${ORIGIN}/backstop/version`)
     );
   }
 }
@@ -135,12 +140,17 @@ function backstopHelper(name, options, res, err) {
       .then(function(data) {
         console.log('Request succeeded with JSON response', data);
         if (data.ok) {
-          res(true);
+          res({ok: true, message: `BackstopJS passed. See: ${ORIGIN}/${BACKSTOP_REPORT_URL}`});
         } else {
-          res(false);
+          res({ok: false, message: `BackstopJS found differences. See: ${ORIGIN}/${BACKSTOP_REPORT_URL}`});
         }
       })
       .catch(function(error) {
+        if (silentlyFailOnError) {
+          const message = `WARNING: BackstopJS has been set to silently fail on error. ${error}`;
+          console.warn(message);
+          res({ok: true, message});
+        }
         err(error);
       });
   }, 0);
@@ -150,8 +160,9 @@ function backstopHelper(name, options, res, err) {
  * I'm in your webapps -- checkin your screenz. -schooch
  */
 export default async function(assert, options) {
-  const backstopResult = new Promise((res, err) => {
+  return new Promise((res, err) => {
     backstopHelper(assert, options, res, err);
+  }).then((backstopResult) => {
+    assert.ok(backstopResult.ok, backstopResult.message);
   });
-  assert.ok(await backstopResult, `See BackstopJS report: ${ORIGIN}/${BACKSTOP_REPORT_URL}`);
 }
