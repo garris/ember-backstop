@@ -1,5 +1,4 @@
 import { later } from 'ember-runloop';
-import { maybeDisableMockjax, maybeResetMockjax } from './mockjax-wrapper';
 
 // If backstop-remote service is not found and silentlyFailOnError === true then 
 // the backstop test will pass with a warning message.
