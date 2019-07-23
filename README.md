@@ -9,7 +9,7 @@
 
 TLDR;
 ------------------------------------------------------------------------------
-If you are new and just want a quick tutorial, try this step-by-step -- you'll be automatically diffing screenshots in about 5 mins!
+QUICK TUTORIAL 👉 If you are new and just want a quick tutorial, try this step-by-step -- you'll be automatically diffing screenshots in about 5 mins!
 https://github.com/garris/ember-backstop-tutorial/
 
 
