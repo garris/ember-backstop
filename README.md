@@ -7,6 +7,13 @@
 - Manages your test and reference files.
 - Works in your existing Acceptance and Integration tests.
 
+TLDR;
+------------------------------------------------------------------------------
+If you are new and just want a quick tutorial try this step-by-step -- you'll be running in about 5 mins!
+https://github.com/garris/ember-backstop-tutorial/
+
+
+
 Installation
 ------------------------------------------------------------------------------
 
@@ -53,7 +60,7 @@ ember backstop-remote
 
 Leave that running while you're testing. When you don't need it anymore you can either close the window or run `ember backstop-stop` to stop the service.
 
-### Running Pemberly
+### Running Ember Server
 Ember-Backstop works with `ember test` and `ember serve` e.g.
 
 ```
