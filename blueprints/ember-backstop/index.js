@@ -7,8 +7,7 @@ module.exports = {
 
   afterInstall() {
     return this.addPackagesToProject([
-      {name : 'backstopjs'},
-      {name : 'ember-cli-shims'}
+      {name : 'backstopjs'}
     ]);
   }
 

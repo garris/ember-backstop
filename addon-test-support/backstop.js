@@ -1,4 +1,4 @@
-import { later } from 'ember-runloop';
+import { later } from '@ember/runloop';
 
 // If backstop-remote service is not found and silentlyFailOnError === true then 
 // the backstop test will pass with a warning message.
