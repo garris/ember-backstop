@@ -86,7 +86,7 @@ Then add an `await backstop(assert);` assertion to any UI state you want to test
   test('it renders the thing', async function(assert) {
     await visit('/sales/company/11102');
     await backstop(assert);
-    assert.dom('#myFancyElement').Exists();
+    assert.dom('#myFancyElement').exists();
   });
 ```
 
