@@ -122,7 +122,7 @@ ember backstop-approve --filter=testFilenameAsRegExString
 ```
 
 ### More Info
-See [http://backstopjs.org]() for documentation on BackstopJS -- but keep in mind -- for this implementation all DOM interactions should probably be done in your Ember test -- and not the BackstopJS config.
+See [http://backstopjs.org](http://backstopjs.org) for documentation on BackstopJS -- but keep in mind -- for this implementation all DOM interactions should probably be done in your Ember test -- and not the BackstopJS config.
 
 ### Issues
 
