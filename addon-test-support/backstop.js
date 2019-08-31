@@ -124,6 +124,7 @@ function backstopHelper(name, options, res, err) {
     enableJavaScript: options.enableJavaScript,
     testHash: testHash,
     origin: ORIGIN,
+    scenario: options.scenario
   });
 
   later(function() {
