@@ -121,6 +121,15 @@ This command also takes an optional `filter` parameter e.g.
 ember backstop-approve --filter=testFilenameAsRegExString
 ```
 
+### Advanced
+The implementation of BackstopJS for this addon relies on Ember helpers to set up your application state.  So many scenario-level configuration features BackstopJS offers (e.g. click helpers, readyEvents, etc.) are not needed. The config file is thus added to your project and stays static during tests.  (for reference see this blueprint... https://github.com/garris/ember-backstop/blob/master/blueprints/ember-backstop/files/ember-backstop/backstop.js)
+
+However, if you are familiar with BackstopJS and would like to modify configuration for any given assertion you can pass a BackstopJS scenario config object with your assert...
+```
+await backstop(assert, {scenario: {selectors: '.jumbo'}});
+```
+see this thread for more info... https://github.com/garris/ember-backstop/issues/8#issuecomment-526861527
+
 ### More Info
 See [http://backstopjs.org](http://backstopjs.org) for documentation on BackstopJS -- but keep in mind -- for this implementation all DOM interactions should probably be done in your Ember test -- and not the BackstopJS config.
 
