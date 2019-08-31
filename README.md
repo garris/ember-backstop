@@ -134,6 +134,7 @@ The backstop helper takes an optional options object. You can configure Backstop
 
 See [Scenario Documention](https://github.com/garris/BackstopJS#advanced-scenarios) for what you can configure.
 
+
 ### More Info
 See [http://backstopjs.org](http://backstopjs.org) for documentation on BackstopJS -- but keep in mind -- for this implementation all DOM interactions should probably be done in your Ember test -- and not the BackstopJS config.
 
