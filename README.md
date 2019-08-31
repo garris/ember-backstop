@@ -121,6 +121,19 @@ This command also takes an optional `filter` parameter e.g.
 ember backstop-approve --filter=testFilenameAsRegExString
 ```
 
+### Configuration Options
+The backstop helper takes an optional options object. You can configure BackstopJS scenario options for your tests dynamically by passing a `scenario` object in the options.
+
+```
+  test('it renders the thing at jumbo size with custom pixel mismatch threshold', async function(assert) {
+    await visit('/sales/company/11102');
+    await backstop(assert, {scenario: {selectors: '.jumbo', misMatchThreshold: 1.5}});
+    assert.dom('#myFancyElement').exists();
+  });
+```
+
+See [Scenario Documention](https://github.com/garris/BackstopJS#advanced-scenarios) for what you can configure.
+
 ### More Info
 See [http://backstopjs.org](http://backstopjs.org) for documentation on BackstopJS -- but keep in mind -- for this implementation all DOM interactions should probably be done in your Ember test -- and not the BackstopJS config.
 
