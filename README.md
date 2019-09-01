@@ -1,5 +1,7 @@
 # ember-backstop
 
+![Scooch and Tomster](https://github.com/garris/BackstopJS/blob/master/assets/scoochAndTomster.png?raw=true)
+
 **BackstopJS visual regression testing addon for Ember.**
 
 - Simple to add, Simple to use.
