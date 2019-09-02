@@ -78,7 +78,7 @@ function json(response) {
 //I'm in your webapps -- checkin ur screenz.
 function backstopHelper(name, testHash, options, res, err) {
   if (!name) {
-    throw new Error('Backstop helper requires an unique name or an assert obj.');
+    throw new Error("Backstop helper requires an unique name.");
   }
 
   if (!testHash) {
@@ -150,6 +150,10 @@ function backstopHelper(name, testHash, options, res, err) {
 }
 
 function createNameHash(assert, options) {
+  if (!assert) {
+    throw new Error("Backstop helper requires an assert object");
+  }
+
   let name = options && options.name ? options.name : ""; //optional name to append to the assertion
   let assertionName;
   let testHash = {};
@@ -181,7 +185,19 @@ function createNameHash(assert, options) {
   // Name generation based on assert count and optional name for the step
   assertionName = `${assertionName}${name} | assert${assertCount}`;
 
+  validateName(assertionName);
+
   return { name: assertionName, testHash: testHash };
+}
+
+function validateName(name) {
+  //Catch ENAMETOOLONG when backstop generates filename
+  const maxLength = 205;
+  if (name.length > maxLength) {
+    throw new Error(
+      `Backstop test name or assertion name too long. Maximum combined length of ${maxLength} characters`
+    );
+  }
 }
 
 /**
