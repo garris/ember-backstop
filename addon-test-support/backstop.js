@@ -156,9 +156,9 @@ function createNameHash(assert, options) {
 
   //namespace our steps to not conflict with qunit steps functionality
   if (!assert.test.backstop) assert.test.backstop = {};
-  if (!assert.test.backstop.steps) assert.test.backstop.steps = [];
 
-  let steps = assert.test.backstop.steps;
+  //Record assertion count
+  assert.test.backstop.assertCount = assert.test.backstop.assertCount + 1 || 0;
 
   if (name && name.length !== 0) {
     name = ` | ${name}`;
@@ -176,12 +176,10 @@ function createNameHash(assert, options) {
     assertionName = `${assert.test.module.name} | ${assert.test.testName}`;
   }
 
-  //Record our step
-  steps.push(steps.length);
+  const assertCount = assert.test.backstop.assertCount;
 
-  // Name generation based on steps and optional name for the step
-  const stepNumber = steps.length - 1;
-  assertionName = `${assertionName}${name} | assert${stepNumber}`;
+  // Name generation based on assert count and optional name for the step
+  assertionName = `${assertionName}${name} | assert${assertCount}`;
 
   return { name: assertionName, testHash: testHash };
 }
