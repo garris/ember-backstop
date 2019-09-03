@@ -76,20 +76,13 @@ function json(response) {
 }
 
 //I'm in your webapps -- checkin ur screenz.
-function backstopHelper(name, options, res, err) {
-  let testHash = {};
+function backstopHelper(name, testHash, options, res, err) {
   if (!name) {
-    throw new Error('Backstop helper requires an unique name or an assert obj.');
+    throw new Error("Backstop helper requires an unique name.");
   }
 
-  // Automatic name generation for QUnit tests by passing in the `assert` object.
-  if (name.test && name.test.module && name.test.module.name && name.test.testName) {
-    testHash.testId = window._testRunTime;
-    testHash.scenarioId = name.test.testId;
-    name = `${name.test.module.name} | ${name.test.testName}`;
-  } else if (name.fullTitle) {
-    // Automatic name generation for Mocha tests by passing in the `this.test` object.
-    name = name.fullTitle();
+  if (!testHash) {
+    throw new Error("Backstop helper requires an unique id for the testHash.");
   }
 
   let snapshotRoot;
@@ -156,13 +149,65 @@ function backstopHelper(name, options, res, err) {
   }, 0);
 }
 
+function createNameHash(assert, options) {
+  if (!assert) {
+    throw new Error("Backstop helper requires an assert object");
+  }
+
+  let name = options && options.name ? options.name : ""; //optional name to append to the assertion
+  let assertionName;
+  let testHash = {};
+
+  //namespace our steps to not conflict with qunit steps functionality
+  if (!assert.test.backstop) assert.test.backstop = {};
+
+  //Record assertion count
+  assert.test.backstop.assertCount = assert.test.backstop.assertCount + 1 || 0;
+
+  if (name && name.length !== 0) {
+    name = ` | ${name}`;
+  }
+
+  // Generate base names to extend
+  if (
+    assert.test &&
+    assert.test.module &&
+    assert.test.module.name &&
+    assert.test.testName
+  ) {
+    testHash.testId = window._testRunTime;
+    testHash.scenarioId = assert.test.testId;
+    assertionName = `${assert.test.module.name} | ${assert.test.testName}`;
+  }
+
+  const assertCount = assert.test.backstop.assertCount;
+
+  // Name generation based on assert count and optional name for the step
+  assertionName = `${assertionName}${name} | assert${assertCount}`;
+
+  validateName(assertionName);
+
+  return { name: assertionName, testHash: testHash };
+}
+
+function validateName(name) {
+  //Catch ENAMETOOLONG when backstop generates filename
+  const maxLength = 205;
+  if (name.length > maxLength) {
+    throw new Error(
+      `Backstop test name or assertion name too long. Maximum combined length of ${maxLength} characters`
+    );
+  }
+}
+
 /**
  * I'm in your webapps -- checkin your screenz. -schooch
  */
-export default async function(assert, options) {
+export default async function (assert, options) {
+  const hash = createNameHash(assert, options);
   return new Promise((res, err) => {
-    backstopHelper(assert, options, res, err);
-  }).then((backstopResult) => {
+    backstopHelper(hash.name, hash.testHash, options, res, err);
+  }).then(backstopResult => {
     assert.ok(backstopResult.ok, backstopResult.message);
   });
 }
