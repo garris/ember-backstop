@@ -1,6 +1,6 @@
 {
   "name": "ember-backstop",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "BackstopJS visual regression testing addon for Ember.",
   "keywords": [
     "ember-addon"
