@@ -15,15 +15,17 @@ module.exports = {
   },
 
   serverMiddleware({ app }) {
+    const config = getConfig(this.project);
     // if using native backstop remote server
-    let proxy = require('http-proxy').createProxyServer({});
+    const proxy = require('http-proxy').createProxyServer({});
+
     proxy.on('error', function(err, req, res) {
-      console.error(err, req.url);
-      res.writeHead(500, {
-        'Content-Type': 'text/plain'
+      res.writeHead(config.skipRemoteError ? 503 : 500, {
+        'Content-Type': 'text/plain',
       });
       res.end(err + ' Please check that backstop-remote service is running.');
     });
+
     app.use(BACKSTOP_PROXY_PATH, function(req, res, next) {
       proxy.web(req, res, { target: BACKSTOP_PROXY_TARGET });
     });
@@ -39,3 +41,20 @@ module.exports = {
     };
   }
 };
+
+function getConfig(project) {
+  let configDir = 'config';
+
+  if (project.pkg['ember-addon'] && project.pkg['ember-addon']['configPath']) {
+    configDir = project.pkg['ember-addon']['configPath'];
+  }
+
+  const config = {};
+
+  try {
+    const configPath = `./${configDir}/${BACKSTOP_ADDON_CONFIG_FILE_NAME}`;
+    Object.assign(config, project.require(configPath));
+  } catch(err) {}
+
+  return config;
+}
