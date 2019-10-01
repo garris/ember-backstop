@@ -1,9 +1,5 @@
 import { later } from '@ember/runloop';
 
-// If backstop-remote service is not found and silentlyFailOnError === true then 
-// the backstop test will pass with a warning message.
-const silentlyFailOnError = false;
-
 const ORIGIN = window.location.origin;
 const BACKSTOP_DYNAMIC_TEST_URL = 'backstop/dtest';
 const BACKSTOP_REPORT_URL = 'backstop/backstop_data/html_report/';
@@ -65,9 +61,11 @@ function status(response) {
   if (response.status >= 200 && response.status < 300) {
     return Promise.resolve(response);
   } else {
-    return Promise.reject(
-      new Error(`Proxy returned "${response.status} ${response.statusText}". Please check that backstop-remote is running. ${ORIGIN}/backstop/version`)
+    const e = new Error(
+      `Proxy returned "${response.status} ${response.statusText}". Please check that backstop-remote is running. ${ORIGIN}/backstop/version`
     );
+    e.silentlyFailOnError = response.status === 503;
+    return Promise.reject(e);
   }
 }
 
@@ -131,7 +129,6 @@ function backstopHelper(name, testHash, options, res, err) {
       .then(status)
       .then(json)
       .then(function(data) {
-        console.log('Request succeeded with JSON response', data);
         if (data.ok) {
           res({ok: true, message: `BackstopJS passed. See: ${ORIGIN}/${BACKSTOP_REPORT_URL}`});
         } else {
@@ -139,7 +136,7 @@ function backstopHelper(name, testHash, options, res, err) {
         }
       })
       .catch(function(error) {
-        if (silentlyFailOnError) {
+        if (error.silentlyFailOnError) {
           const message = `WARNING: BackstopJS has been set to silently fail on error. ${error}`;
           console.warn(message);
           res({ok: true, message});
