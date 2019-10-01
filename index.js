@@ -6,6 +6,7 @@ let bodyParser = require('body-parser');
 // if using native backstop remote server
 const BACKSTOP_PROXY_PATH = '/backstop';
 const BACKSTOP_PROXY_TARGET = 'http://localhost:3000';
+const BACKSTOP_ADDON_CONFIG_FILE_NAME = 'ember-backstop.json';
 
 module.exports = {
   name: 'ember-backstop',
