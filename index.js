@@ -1,8 +1,6 @@
 /* eslint-env node */
 'use strict';
 
-let bodyParser = require('body-parser');
-
 // if using native backstop remote server
 const BACKSTOP_PROXY_PATH = '/backstop';
 const BACKSTOP_PROXY_TARGET = 'http://localhost:3000';
@@ -16,20 +14,11 @@ module.exports = {
   },
 
   serverMiddleware({ app }) {
-    const config = getConfig(this.project);
-    // if using native backstop remote server
-    const proxy = require('http-proxy').createProxyServer({});
+    this._configMiddleware(app);
+  },
 
-    proxy.on('error', function(err, req, res) {
-      res.writeHead(config.skipRemoteError ? 503 : 500, {
-        'Content-Type': 'text/plain',
-      });
-      res.end(err + ' Please check that backstop-remote service is running.');
-    });
-
-    app.use(BACKSTOP_PROXY_PATH, function(req, res, next) {
-      proxy.web(req, res, { target: BACKSTOP_PROXY_TARGET });
-    });
+  testemMiddleware(app) {
+    this._configMiddleware(app);
   },
 
   includedCommands() {
@@ -40,7 +29,24 @@ module.exports = {
       'backstop:stop': require('./commands/backstop-stop'),
       // 'backstop:test': require('./commands/backstop-test')
     };
-  }
+  },
+
+  _configMiddleware(app) {
+    const config = getConfig(this.project);
+    // if using native backstop remote server
+    const proxy = require('http-proxy').createProxyServer({});
+  
+    proxy.on('error', function(err, req, res) {
+      res.writeHead(config.skipRemoteError ? 503 : 500, {
+        'Content-Type': 'text/plain',
+      });
+      res.end(err + ' Please check that backstop-remote service is running.');
+    });
+  
+    app.use(BACKSTOP_PROXY_PATH, function(req, res, next) {
+      proxy.web(req, res, { target: BACKSTOP_PROXY_TARGET });
+    });
+  },
 };
 
 function getConfig(project) {
