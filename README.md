@@ -149,7 +149,7 @@ You can add a custom name segment to your backstop test artifacts by passing a `
     await backstop(assert, {name: 'WITH A CUSTOM NAME'});
   });
 ```
-The above produces two backstop tests with the following titles...
+The above produces two identical backstop tests with the following titles...
 ```
 1) Acceptance__list_rentals__shows_specific_rental_details__assert0_0_document_0_webview
 2) Acceptance__list_rentals__shows_specific_rental_details__WITH_A_CUSTOM_NAME__assert1_0_document_0_webview
