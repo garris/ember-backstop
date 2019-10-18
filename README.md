@@ -124,7 +124,10 @@ ember backstop-approve --filter=testFilenameAsRegExString
 ```
 
 ### Configuration Options
-The backstop helper takes an optional options object. You can configure BackstopJS scenario options for your tests dynamically by passing a `scenario` object in the options.
+The backstop helper takes an optional options object.
+
+#### Scenario Option
+You can configure BackstopJS scenario options for your tests dynamically by passing a `scenario` object in the options.
 
 ```
   test('it renders the thing - selects the .jumbo selector - and compares with a custom mismatch threshold', async function(assert) {
@@ -135,6 +138,24 @@ The backstop helper takes an optional options object. You can configure Backstop
 ```
 
 See [Scenario Documention](https://github.com/garris/BackstopJS#advanced-scenarios) for what you can configure.
+
+#### Name Option
+You can add a custom name segment to your backstop test artifacts by passing a `name` property in the options.
+```
+  test('shows specific rental details', async function(assert) {
+    await visit('/rentals');
+    await click(".grand-old-mansion");
+    await backstop(assert);
+    await backstop(assert, {name: 'WITH A CUSTOM NAME'});
+  });
+```
+The above produces two backstop tests with the following titles...
+```
+1) Acceptance__list_rentals__shows_specific_rental_details__assert0_0_document_0_webview
+2) Acceptance__list_rentals__shows_specific_rental_details__WITH_A_CUSTOM_NAME__assert1_0_document_0_webview
+```
+
+
 
 
 ### More Info
