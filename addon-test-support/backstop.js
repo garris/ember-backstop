@@ -22,6 +22,13 @@ function copyAttributesToBodyCopy(bodyCopy, testingContainer) {
   Object.keys(attributesToCopy).forEach(key => copyAttr(attributesToCopy[key]));
 }
 
+function prepareInputValuesForCopying(snapshotRoot) {
+  snapshotRoot.querySelectorAll('input')
+    .forEach(function (item) {
+      item.setAttribute('value', item.value);
+    });
+}
+
 function getDoctype() {
   let doctypeNode = document.doctype;
   if (!doctypeNode || !doctypeNode.name) {
@@ -100,6 +107,8 @@ function backstopHelper(name, testHash, options, res, err) {
   } else {
     snapshotRoot = testingContainer;
   }
+
+  prepareInputValuesForCopying(snapshotRoot);
 
   let snapshotHtml = snapshotRoot.innerHTML;
 
