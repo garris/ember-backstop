@@ -18,11 +18,7 @@ module.exports = async (page, scenario) => {
 
   // SET COOKIES
   const setCookies = async () => {
-    return Promise.all(
-      cookies.map(async cookie => {
-        await page.setCookie(cookie);
-      })
-    );
+    return Promise.all(cookies.map(cookie => page.setCookie(cookie)));
   };
   await setCookies();
   console.log('Cookie state restored with:', JSON.stringify(cookies, null, 2));
