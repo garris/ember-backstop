@@ -1,3 +1,5 @@
+/* eslint-env browser, node */
+
 const debug = require('debug')('PUPPET_ENGINE_SCRIPT');
 
 module.exports = async (page, scenario, vp) => {
