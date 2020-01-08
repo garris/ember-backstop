@@ -1,6 +1,6 @@
 /* eslint-env browser, node */
 
-const debug = require('debug')('PUPPET_ENGINE_SCRIPT');
+const debug = require('debug')('BackstopJS');
 
 module.exports = async (page, scenario, vp) => {
   debug('SCENARIO > ' + scenario.label);

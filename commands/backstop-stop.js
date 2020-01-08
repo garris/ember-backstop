@@ -1,5 +1,5 @@
 'use strict';
-const debug = require('debug')('COMMAND');
+const debug = require('debug')('BackstopJS');
 const http = require('http');
 
 module.exports = {
