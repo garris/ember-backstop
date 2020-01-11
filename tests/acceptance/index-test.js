@@ -1,13 +1,7 @@
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import {
-  click,
-  currentURL,
-  visit,
-  fillIn,
-  triggerKeyEvent
-} from '@ember/test-helpers'
-import backstop from 'ember-backstop/test-support/backstop'
+import { currentURL, visit } from '@ember/test-helpers';
+import backstop from 'ember-backstop/test-support/backstop';
 
 module('Acceptance | list rentals', function(hooks) {
   setupApplicationTest(hooks);
@@ -18,5 +12,4 @@ module('Acceptance | list rentals', function(hooks) {
     assert.equal(currentURL(), '/', 'URL should be at root.');
     assert.dom(this.element.querySelector('#title')).hasText('Welcome to Ember');
   });
-
 });

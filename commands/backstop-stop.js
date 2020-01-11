@@ -1,5 +1,5 @@
 'use strict';
-const backstopjs = require('backstopjs');
+const debug = require('debug')('BackstopJS');
 const http = require('http');
 
 module.exports = {
@@ -22,14 +22,14 @@ module.exports = {
 
         // The whole response has been received. Print out the result.
         resp.on('end', () => {
-          console.log('The backstop-remote service responded with > ' + data);
+          debug(`The backstop-remote service responded with > ${data}`);
           resolve(0);
         });
 
       }).on("error", (err) => {
-        console.log("Error: " + err.message);
+        debug(`Error: ${err.message}`);
         if (err.code === 'ECONNREFUSED') {
-          console.log('The backstop-remote service was not found.');
+          debug('The backstop-remote service was not found.');
         }
         reject(err);
       });
