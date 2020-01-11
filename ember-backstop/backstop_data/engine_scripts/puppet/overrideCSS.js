@@ -4,10 +4,11 @@ const BACKSTOP_TEST_CSS_OVERRIDE = `#ember-testing {width: 100% !important; heig
 
 module.exports = function(page, scenario) {
   // inject arbitrary css to override styles
+  page.evaluate(`window._styleData = '${BACKSTOP_TEST_CSS_OVERRIDE}'`);
   page.evaluate(() => {
     let style = document.createElement('style');
     style.type = 'text/css';
-    let styleNode = document.createTextNode(`${BACKSTOP_TEST_CSS_OVERRIDE}`);
+    let styleNode = document.createTextNode(window._styleData);
     style.appendChild(styleNode);
     document.head.appendChild(style);
   });
