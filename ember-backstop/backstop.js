@@ -1,4 +1,4 @@
-const path = require('path');
+/* eslint-env browser, node */
 
 module.exports = {
   id: `ember-backstop test`,
@@ -9,7 +9,6 @@ module.exports = {
       height: 900,
     },
   ],
-  onBeforeScript: `puppet/onBefore.js`,
   onReadyScript: `puppet/onReady.js`,
   scenarios: [
     {

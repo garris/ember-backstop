@@ -1,6 +1,6 @@
 /* eslint-env browser, node */
 
-module.exports = function(page, scenario) {
+module.exports = function(page) {
   // inject arbitrary css to override styles
   page.evaluate(() => {
     const BACKSTOP_TEST_CSS_OVERRIDE = `#ember-testing {width: 100% !important; height: 100% !important; -webkit-transform: scale(1) !important; transform: scale(1) !important;}`;
