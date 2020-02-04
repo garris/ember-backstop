@@ -188,3 +188,8 @@ License
 ------------------------------------------------------------------------------
 
 This project is licensed under the [MIT License](LICENSE.md).
+
+
+Ember, the Ember logo design and the Tomster designs are exclusive trademarks registered in the United States by Tilde Inc.. Used here with permission.
+
+Take a look at your test network calls.  Are you seeing `UnrecognizedURLError` errors?  If so, there may be an issue with a middleware addon dependency loading too early. Try ensuring any server dependencies don't block proxy requests to `/backstop/`. Post the issue [here](https://github.com/garris/ember-backstop/issues) and let us know! 
