@@ -23,7 +23,7 @@
     "backstop-stop": "curl http://localhost:3000/stop",
     "backstop-approve": "cd ember-backstop/; backstop approve --config=backstop.js",
     "backstop-report": "cd ember-backstop/; backstop openReport --config=backstop.js",
-    "backstop-test": "npm run backstop-remote & just ember test; npm run backstop-stop"
+    "backstop-test": "npm run backstop-remote & ember test; npm run backstop-stop"
   },
   "dependencies": {
     "backstopjs": "^4.3.2",
