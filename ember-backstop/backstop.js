@@ -13,7 +13,6 @@ module.exports = {
   scenarios: [
     {
       label: '{testName}',
-      cookiePath: 'backstop_data/engine_scripts/cookies.json',
       url: '{origin}/backstop/dview/{testId}/{scenarioId}',
       delay: 500,
     },
