@@ -207,9 +207,27 @@ function validateName(name) {
 }
 
 /**
+ * Reads environment.js config from the meta tag in test page, and returns the config object related to this addon.
+ */
+function getAddonCfgFromParentApp() {
+  const appEnvConfig = document.querySelector('meta[name*="config/environment"]').getAttribute('content');
+  return JSON.parse(decodeURIComponent(appEnvConfig))['ember-backstop'];
+}
+
+/**
  * I'm in your webapps -- checkin your screenz. -schooch
  */
 export default async function (assert, options) {
+  const { enableBackstop } = getAddonCfgFromParentApp();
+
+  if (enableBackstop !== 'true') {
+    assert.ok(
+      true,
+      `Backstop assertion was not run since it's currently disabled. To enable it, set environment variable, ENABLE_BACKSTOP=true`
+    );
+    return Promise.resolve(true);
+  }
+
   const hash = createNameHash(assert, options);
   return new Promise((res, err) => {
     backstopHelper(hash.name, hash.testHash, options, res, err);
