@@ -211,19 +211,19 @@ function validateName(name) {
  */
 function getAddonCfgFromParentApp() {
   const appEnvConfig = document.querySelector('meta[name*="config/environment"]').getAttribute('content');
-  return JSON.parse(decodeURIComponent(appEnvConfig))['ember-backstop'];
+  return JSON.parse(decodeURIComponent(appEnvConfig))['ember-backstop'] || {};
 }
 
 /**
  * I'm in your webapps -- checkin your screenz. -schooch
  */
 export default async function (assert, options) {
-  const { enableBackstop } = getAddonCfgFromParentApp();
+  const { disableBackstop } = getAddonCfgFromParentApp();
 
-  if (enableBackstop !== 'true') {
+  if (disableBackstop) {
     assert.ok(
       true,
-      `Backstop assertion was not run since it's currently disabled. To enable it, set environment variable, ENABLE_BACKSTOP=true`
+      `Backstop assertion was not run since it's currently disabled.`
     );
     return Promise.resolve(true);
   }
