@@ -49,6 +49,39 @@ Add this to your `<project>/testem.js`...
   },
 ```
 
+## Configuration
+
+By default, `ember-backstop` will _not_ take screenshots. To enable taking screenshots do the following:
+
+1. When running ember commands like `ember s`, `ember test`, etc., use the environment variable `ENABLE_BACKSTOP=true`
+
+_Example:_
+
+When running `ember test`, run it as:
+
+```
+ENABLE_BACKSTOP=true ember test
+```
+
+2. Add the below config object to `environment.js`:
+
+```js
+/* environment.js */
+
+module.exports = function(environment) {
+  let ENV = {
+    /* ... other existing configs ABOVE this line */
+
+    'ember-backstop': {
+      enableBackstop: process.env.ENABLE_BACKSTOP
+    }
+
+    /* ... other existing configs BELOW this line */
+  };
+  return ENV;
+};
+```
+
 Usage
 ------------------------------------------------------------------------------
 ### Backstop-remote service
