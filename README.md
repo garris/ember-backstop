@@ -87,7 +87,7 @@ Usage
 ### Backstop-remote service
 You will need the backstop-remote service running for visual tests.
 
-In a seperate window run...
+In a separate window run...
 
 ```
 ember backstop-remote
@@ -170,7 +170,7 @@ You can configure BackstopJS scenario options for your tests dynamically by pass
   });
 ```
 
-See [Scenario Documention](https://github.com/garris/BackstopJS#advanced-scenarios) for what you can configure.
+See [Scenario Documentation](https://github.com/garris/BackstopJS#advanced-scenarios) for what you can configure.
 
 #### Name Option
 You can add a custom name segment to your backstop test artifacts by passing a `name` property in the options.
