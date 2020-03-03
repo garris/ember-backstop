@@ -40,6 +40,16 @@ Add this line to `<project>/mirage/config.json`...
 this.passthrough('/backstop/**');
 ```
 
+### If you use Pretender
+
+Add a passthrough in your pretender config file:
+
+Something like this:
+
+```js
+this.post('/backstop/**', this.passthrough);
+```
+
 ### If you test with `ember test`
 
 Add this to your `<project>/testem.js`...
