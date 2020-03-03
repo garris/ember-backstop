@@ -49,12 +49,37 @@ Add this to your `<project>/testem.js`...
   },
 ```
 
+## Configuration
+
+By default, `ember-backstop` will take screenshots.
+
+To disable this behavior, add the below config object to `environment.js`:
+
+```js
+/* environment.js */
+
+module.exports = function(environment) {
+  let ENV = {
+    /* ... other existing configs ABOVE this line */
+
+    'ember-backstop': {
+      disableBackstop: process.env.DISABLE_BACKSTOP === 'true'
+    }
+
+    /* ... other existing configs BELOW this line */
+  };
+  return ENV;
+};
+```
+
+Then set the environment variable, `DISABLE_BACKSTOP=true` when running commands(for example: _ember s_, _ember test_, _ember exam_, etc.,).
+
 Usage
 ------------------------------------------------------------------------------
 ### Backstop-remote service
 You will need the backstop-remote service running for visual tests.
 
-In a seperate window run...
+In a separate window run...
 
 ```
 ember backstop-remote
@@ -137,7 +162,7 @@ You can configure BackstopJS scenario options for your tests dynamically by pass
   });
 ```
 
-See [Scenario Documention](https://github.com/garris/BackstopJS#advanced-scenarios) for what you can configure.
+See [Scenario Documentation](https://github.com/garris/BackstopJS#advanced-scenarios) for what you can configure.
 
 #### Name Option
 You can add a custom name segment to your backstop test artifacts by passing a `name` property in the options.
