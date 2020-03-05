@@ -63,31 +63,6 @@ Add this to your `<project>/testem.js`...
   },
 ```
 
-## Configuration
-
-By default, `ember-backstop` will take screenshots.
-
-To disable this behavior, add the below config object to `environment.js`:
-
-```js
-/* environment.js */
-
-module.exports = function(environment) {
-  let ENV = {
-    /* ... other existing configs ABOVE this line */
-
-    'ember-backstop': {
-      disableBackstop: process.env.DISABLE_BACKSTOP === 'true'
-    }
-
-    /* ... other existing configs BELOW this line */
-  };
-  return ENV;
-};
-```
-
-Then set the environment variable, `DISABLE_BACKSTOP=true` when running commands(for example: _ember s_, _ember test_, _ember exam_, etc.,).
-
 ## Usage
 
 ### Backstop-remote service
@@ -204,6 +179,37 @@ The above produces two identical backstop tests with the following titles...
 1) Acceptance__list_rentals__shows_specific_rental_details__assert0_0_document_0_webview
 2) Acceptance__list_rentals__shows_specific_rental_details__WITH_A_CUSTOM_NAME__assert1_0_document_0_webview
 ```
+
+#### Using the _Kill Switch_
+
+Taking screenshots is a heavy process and there may be conditions where you want to run Ember tests but skip all the backstop tests. For these occations there is a kill switch called `disableBackstop`.  Setting this to true will "skip" all backstop helper calls. You can configure this in enviornment.js. See below...
+
+```js
+/* environment.js */
+
+module.exports = function(environment) {
+  let ENV = {
+    /* ... other existing configs ABOVE this line */
+
+    'ember-backstop': {
+      disableBackstop: process.env.DISABLE_BACKSTOP === 'true'
+    }
+
+    /* ... other existing configs BELOW this line */
+  };
+  return ENV;
+};
+```
+
+With the above in place, setting the environment variable `DISABLE_BACKSTOP=true` will engage the kill switch. 
+e.g.
+
+```js
+DISABLE_BACKSTOP=true ember s
+DISABLE_BACKSTOP=true ember test
+DISABLE_BACKSTOP=true ember exam
+```
+
 
 ### More Info
 
