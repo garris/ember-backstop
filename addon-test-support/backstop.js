@@ -26,6 +26,9 @@ function prepareInputValuesForCopying(snapshotRoot) {
   snapshotRoot.querySelectorAll('input')
     .forEach(function (item) {
       item.setAttribute('value', item.value);
+      if (item.checked) {
+        item.setAttribute('checked', 'checked');
+      }
     });
 }
 
