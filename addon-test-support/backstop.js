@@ -28,6 +28,8 @@ function prepareInputValuesForCopying(snapshotRoot) {
       item.setAttribute('value', item.value);
       if (item.checked) {
         item.setAttribute('checked', 'checked');
+      } else {
+        item.removeAttribute('checked');
       }
     });
 }
