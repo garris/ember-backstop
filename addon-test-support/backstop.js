@@ -22,14 +22,22 @@ function copyAttributesToBodyCopy(bodyCopy, testingContainer) {
   Object.keys(attributesToCopy).forEach(key => copyAttr(attributesToCopy[key]));
 }
 
-function prepareInputValuesForCopying(snapshotRoot) {
+/**
+ * Sync JS properties to HTML attributes, so Backstop can see it
+ * @param snapshotRoot
+ */
+  export function prepareInputValuesForCopying(snapshotRoot) {
   snapshotRoot.querySelectorAll('input')
     .forEach(function (item) {
       item.setAttribute('value', item.value);
-      if (item.checked) {
-        item.setAttribute('checked', 'checked');
-      } else {
-        item.removeAttribute('checked');
+      if (item.type === 'radio' || item.type === 'checkbox') {
+        if (item.checked) {
+          item.setAttribute('checked', 'checked');
+        } else {
+          item.removeAttribute('checked');
+        }
+        // note: can't handle `indeterminate` state, as there
+        // is no such HTML attribute
       }
     });
 }
