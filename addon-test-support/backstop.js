@@ -12,10 +12,10 @@ const BACKSTOP_REPORT_URL = 'backstop/backstop_data/html_report/';
 export function copyAttributesToBodyCopy(bodyCopy, testingContainer) {
   let attributesToCopy = testingContainer.attributes;
   const copyAttr = function(thisAttr) {
-    // Special case for the class attribute - append new classes onto existing body classes
     if (thisAttr.name !== 'class') {
       bodyCopy.setAttribute(thisAttr.name, thisAttr.value);
     }
+    // Special case for the class attribute - append new classes onto existing body classes
     bodyCopy.classList.add(...testingContainer.classList);
   };
   Object.keys(attributesToCopy).forEach(key => copyAttr(attributesToCopy[key]));

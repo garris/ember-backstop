@@ -85,6 +85,15 @@ module('Unit | Addon Test Support', hooks => {
       copyAttributesToBodyCopy(body, testingContainer);
       assert.equal(body.getAttribute('class'), 'new-class1 new-class2');
     });
+
+    test('Should not introduce classes to a body if neither body or container had classes', async function(assert) {
+      const sourceDocument = document.implementation.createHTMLDocument("Testem page");
+      const body = sourceDocument.body;
+      body.innerHTML = '<div><div id="testing-container"></div></div>';
+      const testingContainer = sourceDocument.getElementById('testing-container');
+      copyAttributesToBodyCopy(body, testingContainer);
+      assert.equal(body.getAttribute('class'), '');
+    });
   });
 
 });
