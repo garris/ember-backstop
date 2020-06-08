@@ -9,15 +9,14 @@ const BACKSTOP_REPORT_URL = 'backstop/backstop_data/html_report/';
 // styling). In tests these attributes are added to the #ember-testing container and would be lost
 // in the DOM hoisting, so we copy them to the to the snapshot's <body> tag to
 // make sure that they persist in the DOM snapshot.
-function copyAttributesToBodyCopy(bodyCopy, testingContainer) {
+export function copyAttributesToBodyCopy(bodyCopy, testingContainer) {
   let attributesToCopy = testingContainer.attributes;
   const copyAttr = function(thisAttr) {
-    // Special case for the class attribute - append new classes onto existing body classes
-    if (thisAttr.name === 'class') {
-      bodyCopy[thisAttr.name] = bodyCopy[thisAttr.name] + ' ' + thisAttr.value;
-    } else {
-      bodyCopy[thisAttr.name] = thisAttr.value;
+    if (thisAttr.name !== 'class') {
+      bodyCopy.setAttribute(thisAttr.name, thisAttr.value);
     }
+    // Special case for the class attribute - append new classes onto existing body classes
+    bodyCopy.classList.add(...testingContainer.classList);
   };
   Object.keys(attributesToCopy).forEach(key => copyAttr(attributesToCopy[key]));
 }

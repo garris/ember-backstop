@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
-import { prepareInputValuesForCopying } from 'ember-backstop/test-support/backstop';
+import { prepareInputValuesForCopying, copyAttributesToBodyCopy } from 'ember-backstop/test-support/backstop';
 
 module('Unit | Addon Test Support', hooks => {
   setupTest(hooks);
@@ -52,6 +52,48 @@ module('Unit | Addon Test Support', hooks => {
       assert.equal(snapshot['button1'].hasAttribute('checked'), false);
     });
 
+  });
+
+  module('#copyAttributesToBodyCopy tests', () => {
+    test('Should copy HTML attributes from a container element to a body', async function(assert) {
+      const sourceDocument = document.implementation.createHTMLDocument("Testem page");
+      const body = sourceDocument.body;
+      body.innerHTML = '<div><div id="testing-container" data-custom-attribute="val1" nonstandardattribute="val2" attributewithoutvalue></div></div>';
+      const testingContainer = sourceDocument.getElementById('testing-container');
+      copyAttributesToBodyCopy(body, testingContainer);
+      assert.equal(body.getAttribute('id'), 'testing-container');
+      assert.equal(body.getAttribute('data-custom-attribute'), 'val1');
+      assert.equal(body.getAttribute('nonstandardattribute'), 'val2');
+      assert.equal(body.hasAttribute('attributewithoutvalue'), true);
+    });
+
+    test('Should append classes from a container to a body which had pre-existing classes', async function(assert) {
+      const sourceDocument = document.implementation.createHTMLDocument("Testem page");
+      const body = sourceDocument.body;
+      body.setAttribute('class', 'original-class1 original-class2')
+      body.innerHTML = '<div><div id="testing-container" class="new-class1 new-class2"></div></div>';
+      const testingContainer = sourceDocument.getElementById('testing-container');
+      copyAttributesToBodyCopy(body, testingContainer);
+      assert.equal(body.getAttribute('class'), 'original-class1 original-class2 new-class1 new-class2');
+    });
+
+    test('Should append classes from a container to a body which had no classes', async function(assert) {
+      const sourceDocument = document.implementation.createHTMLDocument("Testem page");
+      const body = sourceDocument.body;
+      body.innerHTML = '<div><div id="testing-container" class="new-class1 new-class2"></div></div>';
+      const testingContainer = sourceDocument.getElementById('testing-container');
+      copyAttributesToBodyCopy(body, testingContainer);
+      assert.equal(body.getAttribute('class'), 'new-class1 new-class2');
+    });
+
+    test('Should not introduce classes to a body if neither body or container had classes', async function(assert) {
+      const sourceDocument = document.implementation.createHTMLDocument("Testem page");
+      const body = sourceDocument.body;
+      body.innerHTML = '<div><div id="testing-container"></div></div>';
+      const testingContainer = sourceDocument.getElementById('testing-container');
+      copyAttributesToBodyCopy(body, testingContainer);
+      assert.equal(body.getAttribute('class'), '');
+    });
   });
 
 });
