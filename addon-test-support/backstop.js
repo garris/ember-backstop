@@ -135,7 +135,7 @@ function backstopHelper(name, testHash, options, res, err) {
     breakpoints: options.breakpoints,
     enableJavaScript: options.enableJavaScript,
     testHash: testHash,
-    origin: ORIGIN,
+    origin: `http://host.docker.internal:${new URL(ORIGIN).port}`,
     scenario: options.scenario
   });
 
