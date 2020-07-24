@@ -9,7 +9,7 @@ module.exports = function(page) {
     // 2) Injecting it into a rendering harness,
     // 3) Serializing it, and
     // 4) Passing it to BackstopJS for rendering & diffing in the Backstop Env.
-    // This file is used by BackstopJS during step 4 to normalize and reconstitute styles once they have left the testem enviornment.
+    // This file is used by BackstopJS during step 4 to normalize and reconstitute styles once they have left the testem environment.
     const BACKSTOP_TEST_CSS_OVERRIDE = `#ember-testing {width: 100% !important; height: 100% !important; -webkit-transform: scale(1) !important; transform: scale(1) !important;}`;
     let style = document.createElement('style');
     style.type = 'text/css';
