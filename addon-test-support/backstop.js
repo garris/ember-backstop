@@ -1,7 +1,8 @@
 import { later } from '@ember/runloop';
 
 const ORIGIN = window.location.origin;
-const BACKSTOP_DYNAMIC_TEST_URL = 'backstop/dtest';
+const { screenshotsOnly } = getAddonCfgFromParentApp();
+const BACKSTOP_DYNAMIC_TEST_URL = screenshotsOnly ? 'backstop/dref': 'backstop/dtest';
 const BACKSTOP_REPORT_URL = 'backstop/backstop_data/html_report/';
 
 // Copy attributes from Ember's rootElement to the DOM snapshot <body> tag. Some applications rely
