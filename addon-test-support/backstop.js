@@ -137,7 +137,8 @@ function backstopHelper(name, testHash, options, res, err) {
     enableJavaScript: options.enableJavaScript,
     testHash: testHash,
     origin: ORIGIN,
-    scenario: options.scenario
+    scenario: options.scenario,
+    i: screenshotsOnly
   });
 
   later(function() {
