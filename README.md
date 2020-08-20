@@ -204,11 +204,32 @@ module.exports = function(environment) {
 With the above in place, setting the environment variable `DISABLE_BACKSTOP=true` will engage the kill switch. 
 e.g.
 
-```js
+```bash
 DISABLE_BACKSTOP=true ember s
 DISABLE_BACKSTOP=true ember test
 DISABLE_BACKSTOP=true ember exam
 ```
+
+#### Reference-Only mode
+
+Sometimes you just want to generate reference screenshots -- without actually testing anything. You can tell ember-backstop to do this by setting `screenshotsOnly` to `true` in enviornment.js...
+
+```js
+/* environment.js */
+
+module.exports = function(environment) {
+  let ENV = {
+    /* ... other existing configs ABOVE this line */
+
+    'ember-backstop': {
+      screenshotsOnly: true
+    }
+
+    /* ... other existing configs BELOW this line */
+  };
+  return ENV;
+};
+``` 
 
 
 ### More Info
