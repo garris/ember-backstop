@@ -1,13 +1,14 @@
 /* eslint-env node */
-'use strict';
+"use strict";
 
 // if using native backstop remote server
-const BACKSTOP_PROXY_PATH = '/backstop';
-const BACKSTOP_PROXY_TARGET = 'http://localhost:3000';
-const BACKSTOP_ADDON_CONFIG_FILE_NAME = 'ember-backstop.json';
+const BACKSTOP_REMOTE_HTTP_PORT = process.env.BACKSTOP_REMOTE_HTTP_PORT || 3000;
+const BACKSTOP_PROXY_PATH = "/backstop";
+const BACKSTOP_PROXY_TARGET = `http://localhost:${BACKSTOP_REMOTE_HTTP_PORT}`;
+const BACKSTOP_ADDON_CONFIG_FILE_NAME = "ember-backstop.json";
 
 module.exports = {
-  name: 'ember-backstop',
+  name: "ember-backstop",
 
   isDevelopingAddon() {
     return true;
@@ -23,10 +24,10 @@ module.exports = {
 
   includedCommands() {
     return {
-      'backstop:remote': require('./commands/backstop-remote'),
-      'backstop:approve': require('./commands/backstop-approve'),
-      'backstop:report': require('./commands/backstop-report'),
-      'backstop:stop': require('./commands/backstop-stop'),
+      "backstop:remote": require("./commands/backstop-remote"),
+      "backstop:approve": require("./commands/backstop-approve"),
+      "backstop:report": require("./commands/backstop-report"),
+      "backstop:stop": require("./commands/backstop-stop"),
       // 'backstop:test': require('./commands/backstop-test')
     };
   },
@@ -34,26 +35,26 @@ module.exports = {
   _configMiddleware(app) {
     const config = getConfig(this.project);
     // if using native backstop remote server
-    const proxy = require('http-proxy').createProxyServer({});
-  
-    proxy.on('error', function(err, req, res) {
+    const proxy = require("http-proxy").createProxyServer({});
+
+    proxy.on("error", function (err, req, res) {
       res.writeHead(config.skipRemoteError ? 503 : 500, {
-        'Content-Type': 'text/plain',
+        "Content-Type": "text/plain",
       });
-      res.end(err + ' Please check that backstop-remote service is running.');
+      res.end(err + " Please check that backstop-remote service is running.");
     });
-  
-    app.use(BACKSTOP_PROXY_PATH, function(req, res, next) {
+
+    app.use(BACKSTOP_PROXY_PATH, function (req, res, next) {
       proxy.web(req, res, { target: BACKSTOP_PROXY_TARGET });
     });
   },
 };
 
 function getConfig(project) {
-  let configDir = 'config';
+  let configDir = "config";
 
-  if (project.pkg['ember-addon'] && project.pkg['ember-addon']['configPath']) {
-    configDir = project.pkg['ember-addon']['configPath'];
+  if (project.pkg["ember-addon"] && project.pkg["ember-addon"]["configPath"]) {
+    configDir = project.pkg["ember-addon"]["configPath"];
   }
 
   const config = {};
@@ -61,7 +62,7 @@ function getConfig(project) {
   try {
     const configPath = `./${configDir}/${BACKSTOP_ADDON_CONFIG_FILE_NAME}`;
     Object.assign(config, project.require(configPath));
-  } catch(err) {}
+  } catch (err) {}
 
   return config;
 }

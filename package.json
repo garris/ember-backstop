@@ -20,13 +20,13 @@
     "test": "ember test",
     "test:all": "ember try:each",
     "backstop-remote": "cd ember-backstop/; backstop remote --config=backstop.js",
-    "backstop-stop": "curl http://localhost:3000/stop",
+    "backstop-stop": "cd ember-backstop/; backstop stop --config=backstop.js",
     "backstop-approve": "cd ember-backstop/; backstop approve --config=backstop.js",
     "backstop-report": "cd ember-backstop/; backstop openReport --config=backstop.js",
     "backstop-test": "npm run backstop-remote & ember test; npm run backstop-stop"
   },
   "dependencies": {
-    "backstopjs": "^5.0.2",
+    "backstopjs": "garris/BackstopJS#f6a370a33d40993d7112e054e6225917e7ca5036",
     "debug": "^4.1.1",
     "ember-cli-babel": "^7.7.3"
   },
