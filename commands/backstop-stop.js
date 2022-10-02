@@ -1,6 +1,8 @@
 'use strict';
 const debug = require('debug')('BackstopJS');
 const http = require('http');
+const remotePort = process.env.BACKSTOP_REMOTE_HTTP_PORT || 3000;
+const stopUrl = `http://127.0.0.1:${remotePort}/stop/`;
 
 module.exports = {
   name: 'backstop:stop',
@@ -12,7 +14,7 @@ module.exports = {
   description: 'Stop the backstop-remote service.',
   run(commandOptions) {
     return new Promise((resolve, reject) => {
-      http.get('http://127.0.0.1:3000/stop/', (resp) => {
+      http.get(stopUrl, (resp) => {
         let data = '';
 
         // A chunk of data has been recieved.
@@ -28,6 +30,10 @@ module.exports = {
 
       }).on("error", (err) => {
         debug(`Error: ${err.message}`);
+        // ECONNRESET is expected if the stop command worked correctly
+        if (err.code === 'ECONNRESET') {
+          return resolve(0);
+        }
         if (err.code === 'ECONNREFUSED') {
           debug('The backstop-remote service was not found.');
         }
