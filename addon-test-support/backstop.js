@@ -169,7 +169,7 @@ function backstopHelper(name, testHash, options, res, err) {
   }, 0);
 }
 
-function createNameHash(assert, options) {
+export function createNameHash(assert, options) {
   if (!assert) {
     throw new Error("Backstop helper requires an assert object");
   }
@@ -195,7 +195,7 @@ function createNameHash(assert, options) {
     assert.test.module.name &&
     assert.test.testName
   ) {
-    testHash.testId = window._testRunTime;
+    testHash.testId = options.testId ?? window._testRunTime;
     testHash.scenarioId = assert.test.testId;
     assertionName = `${assert.test.module.name} | ${assert.test.testName}`;
   }
