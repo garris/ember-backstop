@@ -140,5 +140,18 @@ module('Unit | Addon Test Support', (hooks) => {
         },
       });
     });
+
+     test.only('Should automatically generate the testId when no options are given', async function (assert) {
+      window._testRunTime = '20230517-171000';
+      const obj = createNameHash(assert);
+      assert.deepEqual(obj, {
+        name: 'Unit | Addon Test Support > #createNameHash tests | Should automatically generate the testId when no options are given | assert0',
+        testHash: {
+          scenarioId: '2f7a5c37',
+          testId: '20230517-171000',
+        },
+      });
+    });
+
   });
 });

@@ -195,7 +195,7 @@ export function createNameHash(assert, options) {
     assert.test.module.name &&
     assert.test.testName
   ) {
-    testHash.testId = options.testId ?? window._testRunTime;
+    testHash.testId = options?.testId ?? window._testRunTime;
     testHash.scenarioId = assert.test.testId;
     assertionName = `${assert.test.module.name} | ${assert.test.testName}`;
   }
