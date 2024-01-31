@@ -35,6 +35,7 @@ module.exports = {
   _configMiddleware(app) {
     const config = getConfig(this.project);
     // if using native backstop remote server
+    // eslint-disable-next-line node/no-extraneous-require
     const proxy = require("http-proxy").createProxyServer({});
 
     proxy.on("error", function (err, req, res) {
@@ -44,6 +45,7 @@ module.exports = {
       res.end(err + " Please check that backstop-remote service is running.");
     });
 
+    // eslint-disable-next-line no-unused-vars
     app.use(BACKSTOP_PROXY_PATH, function (req, res, next) {
       proxy.web(req, res, { target: BACKSTOP_PROXY_TARGET });
     });
@@ -62,6 +64,7 @@ function getConfig(project) {
   try {
     const configPath = `./${configDir}/${BACKSTOP_ADDON_CONFIG_FILE_NAME}`;
     Object.assign(config, project.require(configPath));
+  // eslint-disable-next-line no-empty
   } catch (err) {}
 
   return config;

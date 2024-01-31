@@ -12,6 +12,7 @@ module.exports = {
     { name: 'config', type: String, aliases: ['c'], default: './backstop.js' }
   ],
   description: 'Stop the backstop-remote service.',
+  // eslint-disable-next-line no-unused-vars
   run(commandOptions) {
     return new Promise((resolve, reject) => {
       http.get(stopUrl, (resp) => {

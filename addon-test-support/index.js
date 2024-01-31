@@ -1,3 +1,3 @@
 import { backstop } from './backstop';
 
-export { backstop };
+export default backstop;
